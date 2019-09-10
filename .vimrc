@@ -292,15 +292,14 @@ let g:EasyMotion_smartcase = 1
 nmap <C-p> :Files $PWD<CR>
 
 
-"nmap vv :Rg<CR>
-""使用Rg查询当前光标下的字符  help expand
-"command! -bang -nargs=* Rg
-"  \ call fzf#vim#grep( 
-"  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(expand('<cword>')), 1,
-"  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-"  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-"  \   <bang>0)
-
+nmap <leader>rg :Rg<CR>
+"使用Rg查询当前光标下的字符  help expand
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep( 
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(expand('<cword>')), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
 
 
 "for rooter
@@ -314,14 +313,14 @@ nnoremap <space>p :PreviewClose<cr>
 "for gscope
 "查看引用
 noremap <silent> <leader>gs :GscopeFind s <C-R><C-W><cr>
+"查看引用
+noremap <silent> vv :GscopeFind s <C-R><C-W><cr>
 "查看定义
 noremap <silent> <leader>gg :GscopeFind g <C-R><C-W><cr>
 "查看定义
 noremap <silent> <cr><cr> :GscopeFind g <C-R><C-W><cr>
 "查看被调用
 noremap <silent> <leader>gc :GscopeFind c <C-R><C-W><cr>
-"查看被调用
-noremap <silent> vv :GscopeFind c <C-R><C-W><cr>
 "查找文本
 noremap <silent> <leader>gt :GscopeFind t <C-R><C-W><cr>
 "使用egrep查找
@@ -343,19 +342,24 @@ nnoremap <Space><Space> :BuffergatorToggle<cr>
 
 "for echofunc
 "使其函数原型显示在状态栏
-"set statusline+=%{EchoFuncGetStatusLine()}
-"let g:EchoFuncShowOnStatus = 1
+set statusline+=%{EchoFuncGetStatusLine()}
+let g:EchoFuncShowOnStatus = 1
 
 let g:EchoFuncAutoStartBalloonDeclaration=1
-let g:EchoFuncMaxBalloonDeclarations=2
 
 
 "for deoplete
 "set pyxversion=3
 let g:python3_host_prog = "/usr/local/bin/python3.8"
 let g:python_host_prog  = "/usr/local/bin/python3.8"
-call deoplete#enable()
+"call deoplete#enable()
 let g:deoplete#enable_at_startup = 1
+
+
+"autocmd CompleteDone * silent! pclose!
+set completeopt-=preview
+
+
 
 " Change clang binary path
 call deoplete#custom#var('clangx', 'clang_binary', '/usr/bin/clang')
@@ -365,6 +369,15 @@ call deoplete#custom#var('clangx', 'default_c_options', '')
 call deoplete#custom#var('clangx', 'default_cpp_options', '')
 
 
+
+"for far
+let g:far#auto_preview=0
+nmap <leader>fa :Far 
+nmap <leader>fd :Fardo<cr>
+
+"see more ,you can :help xxx
+
+
 "某些快捷键提示
 
 "<leader>b  ----- 打开buffer列表
@@ -372,10 +385,6 @@ call deoplete#custom#var('clangx', 'default_cpp_options', '')
 
 "<leader>B  ----- 关闭buffer列表
 "d          ----- 删除列表中条目
-
-"for far
-"Far aa bb ../*    
-"Fardo
 
 "for vim-surround
 "ysiw "          ---------光标所在word添加“
@@ -388,7 +397,7 @@ call deoplete#custom#var('clangx', 'default_cpp_options', '')
 
 "for gutentags
 "<leader>cg - 查看光标下符号的定义
-"gg
+"<enter><enter>
 
 "<leader>cs - 查看光标下符号的引用
 
@@ -404,7 +413,8 @@ call deoplete#custom#var('clangx', 'default_cpp_options', '')
 "<leader>p  - 关闭右侧quickfix
 "
 
-
+"for deoplete
+"<C-n>/<C-p>  切换补全预选条目
 
 
 
