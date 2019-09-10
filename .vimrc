@@ -18,13 +18,9 @@ set statusline=[%F]%y%r%m%*%=[Line:%l/%L,Column:%c][%p%%] "显示文件名：总
 set ruler "在编辑过程中，在右下角显示光标位置的状态行
 
 
-
-
-
+"本地映射  :map  unmpa
 let g:mapleader=','
 
-
-"本地映射  :map  unmpa
 inoremap jj <ESC>
 inoremap JJ <ESC>
 map <leader>w <ESC>:w<CR>
@@ -35,8 +31,6 @@ imap <leader>wq <ESC>:wq<CR>
 map <leader>qq <ESC>:qa!<CR>
 map <leader>wqq <ESC>:wqa!<CR>
 imap <leader>wqq <ESC>:wqa!<CR>
-
-
 imap <leader>W <ESC>:w<CR>
 
 "enter键跳转至第一个tag
@@ -89,7 +83,7 @@ nmap <leader>s ]}
 " "打开下个buffer
 " nmap <leader>nb :bn<CR>
 
-
+"分屏
 nmap <Space>v :vs<CR>
 nmap <Space>h :sp<CR>
 
@@ -100,10 +94,8 @@ autocmd BufReadPost *
     \ endif
 
 
-
-
 "vim插件管理 vim-plug
-":PlugInstall
+
 call plug#begin('~/.vim/plugged')
 
 "install startify
@@ -115,7 +107,6 @@ Plug 'kristijanhusak/vim-hybrid-material'
 "install NERDTree
 Plug 'scrooloose/nerdtree'
 
-
 "install tagbar
 Plug 'majutsushi/tagbar'
 
@@ -124,7 +115,6 @@ Plug 'ludovicchabant/vim-gutentags'
 
 "install easymotion
 Plug 'easymotion/vim-easymotion'
-
 
 "install fzf.vim
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -148,8 +138,10 @@ Plug 'skywind3000/gutentags_plus'
 "install vim-preview
 Plug 'skywind3000/vim-preview'
 
+"install vim-buffergator
 Plug 'jeetsukumaran/vim-buffergator'
 
+"install deoplete.nvim
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
@@ -158,8 +150,8 @@ else
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
 
+"install deoplete-clangx
 Plug 'Shougo/deoplete-clangx'
-
 
 call plug#end()
 
@@ -168,7 +160,6 @@ call plug#end()
 
 "for hybrid meterial
 set background=dark
-
 colorschem hybrid_material
 if (has("nvim"))
   "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
@@ -182,15 +173,11 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
-
 "for NERDTree
 "nmap <C-n> :NERDTreeToggle<CR>
 nmap <C-n> :NERDTreeFind<CR>
-
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
 let NERDTreeShowHidden=1
-
 
 "for clang_complete
 " let g:clang_library_path='/usr/lib/llvm-6.0/lib/'
@@ -202,20 +189,14 @@ let NERDTreeShowHidden=1
 " let g:clang_jumpto_declaration_in_preview_key=""
 
 "for tagbar
-
-
-
 nnoremap <silent> <leader>m :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
 
-   
 "for vim-gutentag
 " gutentags搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归 "
 let g:gutentags_project_root = ['.root']
-
 " 所生成的数据文件的名称 "
 let g:gutentags_ctags_tagfile = '.tags'
-
 " 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录 "
 let s:vim_tags = expand('~/.tagscache/tags')
 let g:gutentags_cache_dir = s:vim_tags
@@ -223,12 +204,10 @@ let g:gutentags_cache_dir = s:vim_tags
 if !isdirectory(s:vim_tags)
    silent! call mkdir(s:vim_tags, 'p')
 endif
-
 " 配置 ctags 的参数 "
 let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
 "let g:gutentags_ctags_extra_args += ['--c++-kinds=+pxI']  
 let g:gutentags_ctags_extra_args += ['--c-kinds=+x']  "c 全局变量 
-
 "c -kinds 有以下几种 sh: ctags --list-kinds
 "c  classes
 "    d  macro definitions
@@ -244,54 +223,39 @@ let g:gutentags_ctags_extra_args += ['--c-kinds=+x']  "c 全局变量
 "    u  union names
 "    v  variable definitions
 "    x  external and forward variable declarations [off]
-
-
 set statusline+=%{gutentags#statusline()}
-
-
 let g:gutentags_modules = ['ctags','gtags_cscope']
 let g:gutentags_auto_add_gtags_cscope = 0
-
 let g:gutentags_define_advanced_commands = 1 "debug info
 
 "for gutentags-plus
 let g:gutentags_plus_switch = 1
-
 "取消默认映射
 let g:gutentags_plus_nomap = 1
-
 
 "for easymotion
 map  / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
-
 " These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
 " Without these mappings, `n` & `N` works fine. (These mappings just provide
 " different highlight method and have some other features )
 map  n <Plug>(easymotion-next)
 map  N <Plug>(easymotion-prev)
-
 "map <leader>l <Plug>(easymotion-lineforward)
 "map <leader>j <Plug>(easymotion-j)
 "map <leader>k <Plug>(easymotion-k)
 "map <leader>h <Plug>(easymotion-linebackward)
-
 nmap <leader><leader>l <Plug>(easymotion-lineforward)
 nmap <leader><leader>j <Plug>(easymotion-j)
 nmap <leader><leader>d <Plug>(easymotion-j)
 nmap <leader><leader>k <Plug>(easymotion-k)
 nmap <leader><leader>u <Plug>(easymotion-k)
 nmap <leader><leader>h <Plug>(easymotion-linebackward)
-
 let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
-
 let g:EasyMotion_smartcase = 1
-
 
 "for fzf
 nmap <C-p> :Files $PWD<CR>
-
-
 nmap <leader>rg :Rg<CR>
 "使用Rg查询当前光标下的字符  help expand
 command! -bang -nargs=* Rg
@@ -300,7 +264,6 @@ command! -bang -nargs=* Rg
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
-
 
 "for rooter
 let g:rooter_patterns = ['Rakefile', '.git/', '.root/', 'Makefile']
@@ -336,17 +299,13 @@ noremap <silent> <leader>ga :GscopeFind a <C-R><C-W><cr>
 
 "for buffergator
 let g:buffergator_viewport_split_policy="B"
-
 nnoremap <Space><Space> :BuffergatorToggle<cr>
-
 
 "for echofunc
 "使其函数原型显示在状态栏
 set statusline+=%{EchoFuncGetStatusLine()}
 let g:EchoFuncShowOnStatus = 1
-
 let g:EchoFuncAutoStartBalloonDeclaration=1
-
 
 "for deoplete
 "set pyxversion=3
@@ -354,35 +313,29 @@ let g:python3_host_prog = "/usr/local/bin/python3.8"
 let g:python_host_prog  = "/usr/local/bin/python3.8"
 "call deoplete#enable()
 let g:deoplete#enable_at_startup = 1
-
-
 "autocmd CompleteDone * silent! pclose!
 set completeopt-=preview
 
-
-
+"for deoplete-clangx
 " Change clang binary path
 call deoplete#custom#var('clangx', 'clang_binary', '/usr/bin/clang')
-
 " Change clang options
 call deoplete#custom#var('clangx', 'default_c_options', '')
 call deoplete#custom#var('clangx', 'default_cpp_options', '')
-
-
 
 "for far
 let g:far#auto_preview=0
 nmap <leader>fa :Far 
 nmap <leader>fd :Fardo<cr>
 
-"see more ,you can :help xxx
 
+
+"see more ,you can :help xxx
 
 "某些快捷键提示
 
+"for buffergator
 "<leader>b  ----- 打开buffer列表
-"<space><space>
-
 "<leader>B  ----- 关闭buffer列表
 "d          ----- 删除列表中条目
 
@@ -395,26 +348,10 @@ nmap <leader>fd :Fardo<cr>
 "<leader>k       ---------光标所在的word高亮
 "<leader>K       ---------取消该高亮
 
-"for gutentags
-"<leader>cg - 查看光标下符号的定义
-"<enter><enter>
-
-"<leader>cs - 查看光标下符号的引用
-
-"<leader>cc - 查看有哪些函数调用了该函数
-"vv
-
-"<leader>cf - 查找光标下的文件
-"<leader>ci - 查找哪些文件 include 了本文件
-
-
 "for preview
 "<space>  - 右侧打开该条quickfix
 "<leader>p  - 关闭右侧quickfix
-"
 
 "for deoplete
 "<C-n>/<C-p>  切换补全预选条目
-
-
 
