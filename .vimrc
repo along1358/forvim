@@ -18,7 +18,7 @@ set statusline=[%F]%y%r%m%*%=[Line:%l/%L,Column:%c][%p%%] "显示文件名：总
 set ruler "在编辑过程中，在右下角显示光标位置的状态行
 
 
-"本地映射  :map  unmpa
+"本地映射  :map  :unmap
 let g:mapleader=','
 
 inoremap jj <ESC>
@@ -95,52 +95,38 @@ autocmd BufReadPost *
 
 
 "vim插件管理 vim-plug
+":PlugInstall :PlugClean
 
 call plug#begin('~/.vim/plugged')
-
 "install startify
 Plug 'mhinz/vim-startify'
-
 "install hybrid meterial colorscheme
 Plug 'kristijanhusak/vim-hybrid-material'
-
 "install NERDTree
 Plug 'scrooloose/nerdtree'
-
 "install tagbar
 Plug 'majutsushi/tagbar'
-
 "install vim-gutentag
 Plug 'ludovicchabant/vim-gutentags'
-
 "install easymotion
 Plug 'easymotion/vim-easymotion'
-
 "install fzf.vim
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-
 "install far
 Plug 'brooth/far.vim'
-
 "install vim-interestingwrods
 Plug 'lfv89/vim-interestingwords'
-
 "install surround
 Plug 'tpope/vim-surround'
-
 "install rooter
 Plug 'airblade/vim-rooter'
-
 "install gutentags_plus
 Plug 'skywind3000/gutentags_plus'
-
 "install vim-preview
 Plug 'skywind3000/vim-preview'
-
 "install vim-buffergator
 Plug 'jeetsukumaran/vim-buffergator'
-
 "install deoplete.nvim
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -149,7 +135,6 @@ else
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
-
 "install deoplete-clangx
 Plug 'Shougo/deoplete-clangx'
 
