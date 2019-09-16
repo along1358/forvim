@@ -137,6 +137,10 @@ else
 endif
 "install deoplete-clangx
 Plug 'Shougo/deoplete-clangx'
+"install airline
+"Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
+Plug 'deoplete-plugins/deoplete-tag'
 
 call plug#end()
 
@@ -308,11 +312,15 @@ call deoplete#custom#var('clangx', 'clang_binary', '/usr/bin/clang')
 call deoplete#custom#var('clangx', 'default_c_options', '')
 call deoplete#custom#var('clangx', 'default_cpp_options', '')
 
+
 "for far
 let g:far#auto_preview=0
 nmap <leader>fa :Far 
 nmap <leader>fd :Fardo<cr>
 
+"for airline
+"let g:airline_theme='molokai'
+"let g:airline_theme='dark'
 
 
 "see more ,you can :help xxx
