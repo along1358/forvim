@@ -70,9 +70,9 @@ nmap <leader>v *
 nmap <leader>V #
 
 "跳到本代码段开头
-nmap <leader>S [{
+nmap <leader>s [{
 "跳到本代码段结尾
-nmap <leader>s ]}
+nmap <leader>S ]}
 
 " "buffer opraspaceon
 " "列出所有buffer
